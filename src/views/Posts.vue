@@ -10,14 +10,8 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-alert
-      color="#2A3B4D"
-      dark
-      icon="mdi-firework"
-      dense
-      v-if="notification"
-    >
-      {{notification}}
+    <v-alert color="#2A3B4D" dark icon="mdi-firework" dense v-if="notification">
+      {{ notification }}
     </v-alert>
     <Posts></Posts>
     <div style="position: fixed; bottom: 40px; right: 40px">
@@ -49,8 +43,19 @@ export default {
 
   computed: {
     notification() {
-      return this.$store.state.notification
-    }
+      return this.$store.state.notification;
+    },
+  },
+  watch: {
+    notification: function (val) {
+      if (val) {
+        // hide notificaion after 3 seconds
+        setTimeout(
+          () => this.$store.dispatch(Actions.Toggle_Notification, ""),
+          3000
+        );
+      }
+    },
   },
   async mounted() {
     this.loadPost();

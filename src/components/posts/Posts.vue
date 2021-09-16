@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div style="text-align: center; padding: 20px" >
-      <v-progress-circular indeterminate color="primary" v-if="loading"></v-progress-circular>
+    <div style="text-align: center; padding: 20px">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+        v-if="loading"
+      ></v-progress-circular>
       <h1 v-if="noRecord">No Post founds</h1>
     </div>
     <v-row dense>
@@ -16,8 +20,9 @@
             <div class="post-desc">{{ post.body }}</div>
           </v-card-subtitle>
           <v-card-actions>
-            <v-btn text @click="showComments(post.id)"> <v-icon>mdi-open-in-new</v-icon> 
-            Comments </v-btn>
+            <v-btn text @click="showComments(post.id)">
+              <v-icon>mdi-open-in-new</v-icon> Comments
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -37,8 +42,8 @@ export default {
       return this.$store.state.posts.list;
     },
     noRecord() {
-      return !this.loading && (this.posts || []).length <= 0
-    }
+      return !this.loading && (this.posts || []).length <= 0;
+    },
   },
   methods: {
     showComments(id) {

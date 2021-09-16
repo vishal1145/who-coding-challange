@@ -4,11 +4,7 @@ import * as Mutations from "./mutations";
 
 Vue.use(Vuex);
 
-import {
-  getPosts,
-  addPost,
-  getComments
-} from "../services/posts";
+import { getPosts, addPost, getComments } from "../services/posts";
 
 const posts = {
   state: {
@@ -32,24 +28,33 @@ const posts = {
     getPosts(context, query) {
       context.commit(Mutations.Toggle_Loading, true);
       getPosts(query)
-        .then((posts) => {          
+        .then((posts) => {
           context.commit(Mutations.Show_Posts, posts.data || []);
         })
         .catch((err) => {
-          context.dispatch(Mutations.Toggle_Notification, 'Error in fetching post - ' + err);
+          context.dispatch(
+            Mutations.Toggle_Notification,
+            "Error in fetching post - " + err
+          );
         });
     },
     newPost(context, toggleState) {
-      context.commit(Mutations.Toggle_New_Post, toggleState)
+      context.commit(Mutations.Toggle_New_Post, toggleState);
     },
     createPost(context, post) {
       context.commit(Mutations.Toggle_New_Post, false);
       addPost(post)
         .then(() => {
-          context.dispatch(Mutations.Toggle_Notification, 'Post added success fully, But it will not be visible asd it api getting top 100 by default');
+          context.dispatch(
+            Mutations.Toggle_Notification,
+            "Post added success fully, But it will not be visible asd it api getting top 100 by default"
+          );
         })
         .catch((err) => {
-          context.dispatch(Mutations.Toggle_Notification, 'Error in adding post - ' + err);
+          context.dispatch(
+            Mutations.Toggle_Notification,
+            "Error in adding post - " + err
+          );
         });
     },
   },
@@ -89,7 +94,10 @@ const comments = {
         })
         .catch((err) => {
           context.commit(Mutations.Hide_Comments);
-          context.dispatch('toggleNotification', 'Error in fetching comment - ' + err);
+          context.commit(
+            Mutations.Toggle_Notification,
+            "Error in fetching comment - " + err
+          );
         });
     },
     hideComments(context) {
@@ -100,17 +108,17 @@ const comments = {
 
 export default new Vuex.Store({
   state: {
-    notification : ''
+    notification: "",
   },
-  mutations: {    
+  mutations: {
     toggleNotification(state, payload) {
       state.notification = payload;
-    }
+    },
   },
   actions: {
     toggleNotification(context, payload) {
-      context.commit('toggleNotification', payload);
-    }
+      context.commit("toggleNotification", payload);
+    },
   },
   modules: {
     posts,

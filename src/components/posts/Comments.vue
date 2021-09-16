@@ -7,7 +7,7 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <div style="text-align: center; padding: 20px" >
+            <div style="text-align: center; padding: 20px">
               <v-progress-circular
                 v-if="loading"
                 indeterminate
@@ -58,8 +58,8 @@ export default {
       return this.$store.state.comments.list;
     },
     noRecord() {
-      return !this.loading && (this.comments || []).length <= 0
-    }
+      return !this.loading && (this.comments || []).length <= 0;
+    },
   },
   methods: {
     hideComments() {
