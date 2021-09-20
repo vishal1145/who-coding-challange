@@ -15,7 +15,7 @@
     </v-alert>
     <Posts></Posts>
     <div style="position: fixed; bottom: 40px; right: 40px">
-      <v-btn color="pink" dark fab @click="openPostModal()">
+      <v-btn color="pink" dark fab @click="openPostModal()" id="newPost">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </div>
